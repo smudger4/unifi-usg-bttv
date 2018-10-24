@@ -1,0 +1,88 @@
+{
+    "protocols": {
+        "igmp-proxy": {
+            "interface": {
+                "eth0": {
+                    "alt-subnet": [
+                        "0.0.0.0/0"
+                    ],
+                    "role": "upstream",
+                    "threshold": "1"
+                },
+                "eth1": {
+                    "alt-subnet": [
+                        "0.0.0.0/0"
+                    ],
+                    "role": "downstream",
+                    "threshold": "1"
+                }
+            }
+        } 
+    },
+    "firewall": {
+        "source-validation": "disable"
+    },
+    "interfaces": {
+        "ethernet": {
+            "eth0": {
+                "address": [
+                    "10.0.0.14/24"
+                ],
+                "mtu": "1508",
+                "duplex": "auto",
+                "firewall": {
+                    "in": {
+                        "name": "WAN_IN"
+                    },
+                    "local": {
+                        "name": "WAN_LOCAL"
+                    }
+                },
+                "pppoe": {
+                    "0": {
+                        "default-route": "auto",
+                        "firewall": {
+                            "in": {
+                                "name": "WAN_IN"
+                            },
+                            "local": {
+                                "name": "WAN_LOCAL"
+                            }
+                        },
+                        "mtu": "1492",
+                        "name-server": "auto",
+                        "password": "bt",
+                        "user-id": "bthomehub@btbroadband.com"
+                    }
+                },
+                "speed": "auto"
+            },
+            "eth1": {
+                "address": [
+                    "IP ADDRESS OF YOUR USG/24"
+                ],
+                "duplex": "auto",
+                "firewall": {
+                    "in": {
+                        "name": "LAN_IN"
+                    },
+                    "local": {
+                        "name": "LAN_LOCAL"
+                    },
+                    "out": {
+                        "name": "LAN_OUT"
+                    }
+                },
+                "speed": "auto"
+            },
+            "eth2": {
+                "disable": "''",
+                "duplex": "auto",
+                "speed": "auto"
+            }
+        },
+        "loopback": {
+            "lo": "''"
+        }
+    }
+}
